@@ -1,2 +1,2 @@
-custom/*.sh
-custom/*.ini
+custom/*
+!custom/.keep-gatherphp

@@ -1,2 +1,3 @@
 php-*/
-bzips/*.bz2
+bzips/*
+!bzips/.keep-gatherphp
