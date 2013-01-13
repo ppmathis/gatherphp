@@ -34,6 +34,14 @@ The order of the flags does not matter - GatherPHP will sort them for you! These
 - **32bits** forces the creation of a 32bits version on a 64bit machine
 - **pear** adds & installs PEAR support
 
+After the installation, GatherPHP creates some symlinks in /inst/bin. If you will extend your $PATH variable so that it will point to /path/to/gatherphp/inst/bin, you can use commands like this:
+
+```bash
+php-5.4.10 ...
+phpize-5.4.10-debug ...
+pear-5.3.0 ...
+```
+
 ## Configure options customization ##
 Whenever you install a PHP version, GatherPHP will look for the following files in the **custom/** folder:
 
