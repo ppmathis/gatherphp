@@ -20,6 +20,8 @@ Just run the following command and a new PHP version will get installed:
 ./install.sh [PHP Version]
 ```
 
+**Notice:** Do *not* use sudo for installing new versions. Either put GatherPHP in a directory where you've got write access to or use an interactive shell. (```sudo -i```, ```sudo su```...)
+
 GatherPHP will automatically fetch the correct archive, extract, configure and install it. But that is not all yet - you can append flags after the *PHP Version*, like here:
 
 ```bash
