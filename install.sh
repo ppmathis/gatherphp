@@ -74,7 +74,7 @@ if [ ! -d "$srcdir" ]; then
 	fi
 
 	# Extract the source file
-	tar xjvf "$srcfile" --show-transformed-names --xform 's#^[^/]*#src/php-'"$HARD_VERSION"'#'
+	tar xjvf "$srcfile" --show-transformed-names --xform 's#^[^/]*#src/php-'"$VERSION"'#'
 	if [ $? -ne 0 ]; then
 		echo "Failed to extract source file: $srcfile" >&2
 		exit 2
