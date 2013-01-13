@@ -79,6 +79,8 @@ GatherPHP will also look for the following files in the **custom/** folder to ge
 - **php-** *major.minor.patch-flags* **.ini** (e.g. ```php-5.4.10-debug-pear.ini```)
 
 Other than during the configure options part, **all** the available ini files are merged together in the order specified as above.
+If no custom file can be found, GatherPHP will try to copy the php.ini-recommended / php.ini-development configuration from the PHP sources.
+If there is also no configuration file available, GatherPHP will notice you.
 
 ## Post-installation scripts ##
 GatherPHP also supports post-installation scripts for copying extensions, installating PEAR modules and so on. Again, it will look for the following files in the **custom/** folder:
