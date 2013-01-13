@@ -188,7 +188,7 @@ for suffix in \
 	"-$VMAJOR.$VMINOR$FLAGS" \
 	"-$VMAJOR.$VMINOR.$VPATCH$FLAGS" \
 ; do
-	custom="custom/php$suffix.ini"
+	custom="$basedir/custom/php$suffix.ini"
 	if [ -e "$custom" ]; then
 		if [ $useCustom -eq 0 ]; then
 			useCustom=1
@@ -202,6 +202,7 @@ for suffix in \
 done
 
 # If no custom PHP.ini was found, copy the default one
+cd "$srcdir"
 if [ $useCustom -eq 0 ]; then
 	if [ -f "php.ini-recommended" ]; then
 		cp "php.ini-recommended" "$initarget"
@@ -306,7 +307,7 @@ for suffix in \
 	"-$VMAJOR.$VMINOR$FLAGS" \
 	"-$VMAJOR.$VMINOR.$VPATCH$FLAGS" \
 ; do
-	post="custom/post-install$suffix.sh"
+	post="$basedir/custom/post-install$suffix.sh"
 	if [ -e "$post" ]; then
 		echo ''
 		echo "Running commands from '$post'"
