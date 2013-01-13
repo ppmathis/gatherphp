@@ -37,12 +37,12 @@ The order of the flags does not matter - GatherPHP will sort them for you! These
 ## Configure options customization ##
 Whenever you install a PHP version, GatherPHP will look for the following files in the **custom/** folder:
 
-- **options-***major.minor.patch-flags***.sh** (e.g. ```options-5.4.10-debug-pear.sh```)
-- **options-***major.minor-flags***.sh** (e.g. ```options-5.4-debug-pear.sh```)
-- **options-***major-flags***.sh** (e.g. ```options-5-debug-pear.sh```)
-- **options-***major.minor.patch***.sh** (e.g. ```options-5.4.10.sh```)
-- **options-***major.minor***.sh** (e.g. ```options-5.4.sh```)
-- **options-***major***.sh** (e.g. ```options-5.sh```)
+- **options-** *major.minor.patch-flags* **.sh** (e.g. ```options-5.4.10-debug-pear.sh```)
+- **options-** *major.minor-flags* **.sh** (e.g. ```options-5.4-debug-pear.sh```)
+- **options-** *major-flags* **.sh** (e.g. ```options-5-debug-pear.sh```)
+- **options-** *major.minor.patch* **.sh** (e.g. ```options-5.4.10.sh```)
+- **options-** *major.minor* **.sh** (e.g. ```options-5.4.sh```)
+- **options-** *major* **.sh** (e.g. ```options-5.sh```)
 - **options.sh**
 
 The first file which can be found will be taken - other files will be ignored. While installating a PHP version, GatherPHP shows you which configure options file will be used. A options file should look like this:
@@ -61,12 +61,12 @@ config_options="		\
 GatherPHP will also look for the following files in the **custom/** folder to generate a php.ini file:
 
 - **php.ini**
-- **php-***major***.ini** (e.g. ```php-5.ini```)
-- **php-***major.minor***.ini** (e.g. ```php-5.4.ini```)
-- **php-***major.minor.patch***.ini** (e.g. ```php-5.4.10.ini```)
-- **php-***major-flags***.ini** (e.g. ```php-5-debug-pear.ini```)
-- **php-***major.minor-flags***.ini** (e.g. ```php-5.4-debug-pear.ini```)
-- **php-***major.minor.patch-flags***.ini** (e.g. ```php-5.4.10-debug-pear.ini```)
+- **php-** *major* **.ini** (e.g. ```php-5.ini```)
+- **php-** *major.minor* **.ini** (e.g. ```php-5.4.ini```)
+- **php-** *major.minor.patch* **.ini** (e.g. ```php-5.4.10.ini```)
+- **php-** *major-flags* **.ini** (e.g. ```php-5-debug-pear.ini```)
+- **php-** *major.minor-flags* **.ini** (e.g. ```php-5.4-debug-pear.ini```)
+- **php-** *major.minor.patch-flags* **.ini** (e.g. ```php-5.4.10-debug-pear.ini```)
 
 Other than during the configure options part, **all** the available ini files are merged together in the order specified as above.
 
@@ -74,12 +74,12 @@ Other than during the configure options part, **all** the available ini files ar
 GatherPHP also supports post-installation scripts for copying extensions, installating PEAR modules and so on. Again, it will look for the following files in the **custom/** folder:
 
 - **post-install.sh**
-- **post-install-***major***.sh** (e.g. ```post-install-5.sh```)
-- **post-install-***major.minor***.sh** (e.g. ```post-install-5.4.sh```)
-- **post-install-***major.minor.patch***.sh** (e.g. ```post-install-5.4.10.sh```)
-- **post-install-***major-flags***.sh** (e.g. ```post-install-5-debug-pear.sh```)
-- **post-install-***major.minor-flags***.sh** (e.g. ```post-install-5.4-debug-pear.sh```)
-- **post-install-***major.minor.patch-flags***.sh** (e.g. ```post-install-5.4.10-debug-pear.sh```)
+- **post-install-** *major* **.sh** (e.g. ```post-install-5.sh```)
+- **post-install-** *major.minor* **.sh** (e.g. ```post-install-5.4.sh```)
+- **post-install-** *major.minor.patch* **.sh** (e.g. ```post-install-5.4.10.sh```)
+- **post-install-** *major-flags* **.sh** (e.g. ```post-install-5-debug-pear.sh```)
+- **post-install-** *major.minor-flags* **.sh** (e.g. ```post-install-5.4-debug-pear.sh```)
+- **post-install-** *major.minor.patch-flags* **.sh** (e.g. ```post-install-5.4.10-debug-pear.sh```)
 
 A post-installation script gets called with the following parameters:
 
