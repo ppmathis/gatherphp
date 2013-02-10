@@ -40,8 +40,8 @@ echo "PHP version: $VERSION"
 echo "Source directory: $srcdir"
 echo "Installation directory: $instdir"
 echo ''
-# read -p 'Do you want to continue (Y/N)? '
-# [ "$(echo $REPLY | tr [:upper:] [:lower:])" == "y" ] || exit
+read -p 'Do you want to continue (Y/N)? '
+[ "$(echo $REPLY | tr [:upper:] [:lower:])" == "y" ] || exit
 echo 'Installation progress'
 echo '-----------------------------------'
 
