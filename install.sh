@@ -179,27 +179,32 @@ echo ''
 initarget="$instdir/lib/php.ini"
 useCustom=0
 
-for suffix in \
-	"" \
-	"-$VMAJOR" \
-	"-$VMAJOR.$VMINOR" \
-	"-$VMAJOR.$VMINOR.$VPATCH" \
-	"-$VMAJOR$FLAGS" \
-	"-$VMAJOR.$VMINOR$FLAGS" \
-	"-$VMAJOR.$VMINOR.$VPATCH$FLAGS" \
-; do
-	custom="$basedir/custom/php$suffix.ini"
-	if [ -e "$custom" ]; then
-		if [ $useCustom -eq 0 ]; then
-			useCustom=1
-			sed -e 's#$ext_dir#'"$ext_dir"'#' "$custom" > "$initarget"
-			echo "Using custom php.ini: $custom"
-		else
-			sed -e 's#$ext_dir#'"$ext_dir"'#' "$custom" >> "$initarget"
-			echo "Appending custom php.ini: $custom"
+if [ ! -f "$initarget" ]; then
+	for suffix in \
+		"" \
+		"-$VMAJOR" \
+		"-$VMAJOR.$VMINOR" \
+		"-$VMAJOR.$VMINOR.$VPATCH" \
+		"-$VMAJOR$FLAGS" \
+		"-$VMAJOR.$VMINOR$FLAGS" \
+		"-$VMAJOR.$VMINOR.$VPATCH$FLAGS" \
+	; do
+		custom="$basedir/custom/php$suffix.ini"
+		if [ -e "$custom" ]; then
+			if [ $useCustom -eq 0 ]; then
+				useCustom=1
+				sed -e 's#$ext_dir#'"$ext_dir"'#' "$custom" > "$initarget"
+				echo "Using custom php.ini: $custom"
+			else
+				sed -e 's#$ext_dir#'"$ext_dir"'#' "$custom" >> "$initarget"
+				echo "Appending custom php.ini: $custom"
+			fi
 		fi
-	fi
-done
+	done
+else
+	useCustom=1
+	echo "Skipped creation of $initarget."
+fi
 
 # If no custom PHP.ini was found, copy the default one
 cd "$srcdir"
@@ -229,6 +234,7 @@ else
 	# Delete old symlinks if there are some
 	rm -f "$shbindir/php-$VERSION"
 	rm -f "$shbindir/php-cgi-$VERSION"
+	rm -f "$shbindir/php-fpm-$VERSION"
 	rm -f "$shbindir/phpconfig-$VERSION"
 	rm -f "$shbindir/phpize-$VERSION"
 
@@ -238,20 +244,6 @@ else
 	rm -f "$shbindir/phar-$VERSION"
 fi
 
-# Symlink PHP executable
-bphp="$instdir/bin/php"
-bphpgcno="$instdir/bin/php.gcno"
-if [ -f "$bphp" ]; then
-	ln -fs "$bphp" "$shbindir/php-$VERSION"
-	echo "Created symlink $shbindir/php-$VERSION"
-elif [ -f "$bphpgcno" ]; then
-	ln -fs "$bphpgcno" "$shbindir/php-$VERSION"
-	echo "Created symlink $shbindir/php-$VERSION"
-else
-	echo 'No php binary found.' >&2
-	exit 7
-fi
-
 # [Function] symlink
 function symlink {
 	if [ -e "$1" ]; then
@@ -259,9 +251,21 @@ function symlink {
 		echo "Created symlink $1"
 	else
 		binary=`basename "$1"`
-		echo "WARNING: No $binary binary found." >&2
+		echo "NOTICE: No $binary binary found." >&2
 	fi
 }
+
+# Symlink PHP executable
+bphp="$instdir/bin/php"
+bphpgcno="$instdir/bin/php.gcno"
+if [ -f "$bphp" ]; then
+	symlink "$bphp" "$shbindir/php-$VERSION"
+elif [ -f "$bphpgcno" ]; then
+	symlink "$bphpgcno" "$shbindir/php-$VERSION"
+else
+	echo 'No php binary found.' >&2
+	exit 7
+fi
 
 # Symlink PHP cgi executable
 bphpcgi="$instdir/bin/php-cgi"
@@ -271,8 +275,11 @@ if [ -f "$bphpcgi" ]; then
 elif [ -f "$bphpcgigcno" ]; then
 	symlink "$bphpcgigcno" "$shbindir/php-cgi-$VERSION"
 else
-	echo 'WARNING: No php-cgi binary found.' >&2
+	echo 'NOTICE: No php-cgi binary found.' >&2
 fi
+
+# Symlink PHP fpm executable
+symlink "$instdir/sbin/php-fpm" "$shbindir/php-fpm-$VERSION"
 
 # Symlink php-config & phpize
 symlink "$instdir/bin/php-config" "$shbindir/php-config-$VERSION"
