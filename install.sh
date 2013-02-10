@@ -40,8 +40,8 @@ echo "PHP version: $VERSION"
 echo "Source directory: $srcdir"
 echo "Installation directory: $instdir"
 echo ''
-read -p 'Do you want to continue (Y/N)? '
-[ "$(echo $REPLY | tr [:upper:] [:lower:])" == "y" ] || exit
+# read -p 'Do you want to continue (Y/N)? '
+# [ "$(echo $REPLY | tr [:upper:] [:lower:])" == "y" ] || exit
 echo 'Installation progress'
 echo '-----------------------------------'
 
@@ -58,8 +58,8 @@ if [ ! -d "$srcdir" ]; then
 
 		# Try to download version from museum
 		url="http://museum.php.net/php$VMAJOR/php-$SHORT_VERSION.tar.bz2"
-		wget -P "$bzipsdir" -O "$srcfile" "$url"
-		if [ ! -f "$srfile" ]; then
+		wget -P "$bzipsdir" "$url"
+		if [ ! -f "$srcfile" ]; then
 			echo "Fetching sources from museum failed: $url"
 
 			# Try the real download now
@@ -68,6 +68,29 @@ if [ ! -d "$srcdir" ]; then
 		fi
 		if [ ! -s "$srcfile" -a -f "$srcfile" ]; then
 			rm "$srcfile"
+		fi
+
+		# Try to download from QAs
+		if [ ! -f "$srcfile" ]; then
+			release_masters="johannes stas dsp ilia"
+			for release_master in $release_masters; do
+				url="http://downloads.php.net/$release_master/php-$SHORT_VERSION.tar.bz2"
+				wget -P "$bzipsdir" -O "$srcfile" "$url"
+
+				if [ ! -s "$srcfile" -a -f "$srcfile" ]; then
+					echo "Fetching sources from QA failed: $url"
+					rm "$srcfile"
+				else
+					break
+				fi
+			done
+		fi
+		if [ ! -s "$srcfile" -a -f "$srcfile" ]; then
+			rm "$srcfile"
+		fi
+
+		# If everything failed, abort
+		if [ ! -f "$srcfile" ]; then
 			echo "Fetching sources failed: $url" >&2
 			exit 2
 		fi
