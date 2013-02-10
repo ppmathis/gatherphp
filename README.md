@@ -44,7 +44,6 @@ phpize-5.4.10-debug ...
 pear-5.3.0 ...
 ```
 
-<<<<<<< HEAD
 ## Switching the standard PHP version ##
 With GatherPHP, you can also easily change the system-wide standard PHP version. Just execute the following command and a nice 'setup' will guide you through the progress:
 
@@ -54,8 +53,6 @@ With GatherPHP, you can also easily change the system-wide standard PHP version.
 
 Ofcourse you **must** run this command with the correct permissions. (It will install itself into /usr/local/bin or /usr/local/sbin, so you should use sudo.)
 
-=======
->>>>>>> 9b7223cadf5b27459fee48c3d3c04683ec0033e2
 ## Configure options customization ##
 Whenever you install a PHP version, GatherPHP will look for the following files in the **custom/** folder:
 
