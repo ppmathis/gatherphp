@@ -56,7 +56,7 @@ CHOOSEN_VERSION=${VERSIONS_ARRAY[$SELECTION]}
 echo ''
 echo 'Installation progress'
 echo '-----------------------------------'
-echo "Choosen version: $VERSION"
+echo "Choosen version: $CHOOSEN_VERSION"
 echo ""
 
 # [Function] resolveLink
