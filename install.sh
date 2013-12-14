@@ -200,6 +200,7 @@ fi
 # -------------------------
 # Apply custom PHP.ini if available
 echo ''
+mkdir "$instdir/etc"
 initarget="$instdir/etc/php.ini"
 useCustom=0
 
