@@ -139,7 +139,8 @@ if [ $config_timestamp -gt $tstamp ]; then
 
 	./configure $config_options \
 		--prefix="$instdir" \
-		--exec-prefix="$instdir"
+		--exec-prefix="$instdir" \
+		--with-config-file-path="$instdir/etc"
 
 	if [ $? -gt 0 ]; then
 		echo 'configure.sh failed' >&2
@@ -199,7 +200,7 @@ fi
 # -------------------------
 # Apply custom PHP.ini if available
 echo ''
-initarget="$instdir/lib/php.ini"
+initarget="$instdir/etc/php.ini"
 useCustom=0
 
 if [ ! -f "$initarget" ]; then
