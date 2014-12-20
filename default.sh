@@ -73,6 +73,7 @@ function resolveLink {
 PHP_BINARY=`resolveLink "$shbindir/php-$CHOOSEN_VERSION"`
 PHP_CGI_BINARY=`resolveLink "$shbindir/php-cgi-$CHOOSEN_VERSION"`
 PHP_FPM_BINARY=`resolveLink "$shbindir/php-fpm-$CHOOSEN_VERSION"`
+PHPDBG_BINARY=`resolveLink "$shbindir/phpdbg-$CHOOSEN_VERSION"`
 PHP_CONFIG_BINARY=`resolveLink "$shbindir/php-config-$CHOOSEN_VERSION"`
 PHPIZE_BINARY=`resolveLink "$shbindir/phpize-$CHOOSEN_VERSION"`
 
@@ -103,6 +104,7 @@ function symlink {
 symlink "$PHP_BINARY" "$symlinkdir/php"
 symlink "$PHP_CGI_BINARY" "$symlinkdir/php-cgi"
 symlink "$PHP_FPM_BINARY" "$symlinksdir/php-fpm"
+symlink "$PHPDBG_BINARY" "$symlinkdir/phpdbg"
 symlink "$PHP_CONFIG_BINARY" "$symlinkdir/php-config"
 symlink "$PHPIZE_BINARY" "$symlinkdir/phpize"
 
