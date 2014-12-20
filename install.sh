@@ -306,6 +306,9 @@ fi
 # Symlink PHP fpm executable
 symlink "$instdir/sbin/php-fpm" "$shbindir/php-fpm-$VERSION"
 
+# Symlink PHP dbg executable
+symlink "$instdir/bin/phpdbg" "$shbindir/phpdbg-$VERSION"
+
 # Symlink php-config & phpize
 symlink "$instdir/bin/php-config" "$shbindir/php-config-$VERSION"
 symlink "$instdir/bin/phpize" "$shbindir/phpize-$VERSION"
