@@ -33,24 +33,30 @@ echo 'standard PHP version. Please choose the desired'
 echo 'PHP version from the list.'
 echo ''
 
-# Print version list
-NUMBER=0
-for VERSION in $VERSIONS; do
-	echo "$NUMBER) $VERSION"
-	NUMBER=$(($NUMBER + 1))
-done
-MAX_NUMBER=$NUMBER
+# Support skipping of version list when providing version as argument
+if [ -e "${shbindir}/php-$1" ]; then
+	CHOOSEN_VERSION=$1
+	echo 'Version provided by command line argument, skipping version list...'
+else
+	# Print version list
+	NUMBER=0
+	for VERSION in $VERSIONS; do
+		echo "$NUMBER) $VERSION"
+		NUMBER=$(($NUMBER + 1))
+	done
+	MAX_NUMBER=$NUMBER
 
-# Let the user choose and check the selection
-echo ''
-read -p 'Select the desired PHP version: '
-SELECTION=$REPLY
+	# Let the user choose and check the selection
+	echo ''
+	read -p 'Select the desired PHP version: '
+	SELECTION=$REPLY
 
-if [ $SELECTION -lt 0 ] || [ $SELECTION -gt $MAX_NUMBER ]; then
-	echo 'Selection does not exist. Script aborted.'
-	exit 1
+	if [ $SELECTION -lt 0 ] || [ $SELECTION -gt $MAX_NUMBER ]; then
+		echo 'Selection does not exist. Script aborted.'
+		exit 1
+	fi
+	CHOOSEN_VERSION=${VERSIONS_ARRAY[$SELECTION]}
 fi
-CHOOSEN_VERSION=${VERSIONS_ARRAY[$SELECTION]}
 
 # Print installation progress message
 echo ''
